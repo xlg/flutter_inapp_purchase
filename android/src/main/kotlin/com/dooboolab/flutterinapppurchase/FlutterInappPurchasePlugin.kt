@@ -20,18 +20,19 @@ class FlutterInappPurchasePlugin : FlutterPlugin, ActivityAware {
     }
 
     private fun onAttached(context: Context, messenger: BinaryMessenger) {
-        isAndroid = isPackageInstalled(context, "com.android.vending")
-        isAmazon = isPackageInstalled(context, "com.amazon.venezia")
+//        isAndroid = isPackageInstalled(context, "com.android.vending")
+//        isAmazon = isPackageInstalled(context, "com.amazon.venezia")
+        isAndroid = true;
 
         // In the case of an amazon device which has been side loaded with the Google Play store,
         // we should use the store the app was installed from.
-        if (isAmazon && isAndroid) {
-            if (isAppInstalledFrom(context, "amazon")) {
-                isAndroid = false
-            } else {
-                isAmazon = false
-            }
-        }
+//        if (isAmazon && isAndroid) {
+//            if (isAppInstalledFrom(context, "amazon")) {
+//                isAndroid = false
+//            } else {
+//                isAmazon = false
+//            }
+//        }
         channel = MethodChannel(messenger, "flutter_inapp")
         if (isAndroid) {
             androidInappPurchasePlugin = AndroidInappPurchasePlugin()
@@ -102,20 +103,20 @@ class FlutterInappPurchasePlugin : FlutterPlugin, ActivityAware {
             instance.onAttached(registrar.context(), registrar.messenger())
         }
 
-        private fun isPackageInstalled(ctx: Context, packageName: String): Boolean {
-            return try {
-                ctx.packageManager.getPackageInfo(packageName, 0)
-                true
-            } catch (e: NameNotFoundException) {
-                false
-            }
-        }
-
-        fun isAppInstalledFrom(ctx: Context, installer: String?): Boolean {
-            val installerPackageName = ctx.packageManager.getInstallerPackageName(ctx.packageName)
-            return installer != null && installerPackageName != null && installerPackageName.contains(
-                installer
-            )
-        }
+//        private fun isPackageInstalled(ctx: Context, packageName: String): Boolean {
+//            return try {
+//                ctx.packageManager.getPackageInfo(packageName, 0)
+//                true
+//            } catch (e: NameNotFoundException) {
+//                false
+//            }
+//        }
+//
+//        fun isAppInstalledFrom(ctx: Context, installer: String?): Boolean {
+//            val installerPackageName = ctx.packageManager.getInstallerPackageName(ctx.packageName)
+//            return installer != null && installerPackageName != null && installerPackageName.contains(
+//                installer
+//            )
+//        }
     }
 }
