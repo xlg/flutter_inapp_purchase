@@ -27,9 +27,6 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      android:
-        package: com.dooboolab.flutterinapppurchase
-        pluginClass: FlutterInappPurchasePlugin
-        mainClass: FlutterInappPurchasePlugin
+      # 仅使用 iOS。Android 实现依赖已移除的 PluginRegistry.Registrar，不参与编译。
       ios:
         pluginClass: FlutterInappPurchasePlugin
